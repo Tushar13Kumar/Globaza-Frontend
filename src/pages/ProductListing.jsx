@@ -23,7 +23,7 @@ export default function ProductListing() {
   const { categoryName } = useParams();
 
   // ✅ Fetch all products
-  const { data, loading, error } = useFetch("http://localhost:3000/products");
+  const { data, loading, error } = useFetch("https://backend-globaza.vercel.app/products");
   const [cartItems , setCartItems] = useState([])
   const [wishlistItems , setWishlistItems] = useState([])
   const [categoryCheckBox , setCategoryCheckBox] = useState([])

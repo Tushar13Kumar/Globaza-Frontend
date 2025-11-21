@@ -8,7 +8,7 @@ export default function ProductDetails(){
     const {productId} = useParams()
     const {cart , addToCart} = useCart();
 
-    const  { data, loading, error } = useFetch("http://localhost:3000/products")
+    const  { data, loading, error } = useFetch("https://backend-globaza.vercel.app/products")
     const [cartItemsButton , setCartItemsButton] = useState([])
     const [wishListItemsIcon , setWishListItemsIcon] = useState([])
     if(loading)return(  <p>Loading....</p> )

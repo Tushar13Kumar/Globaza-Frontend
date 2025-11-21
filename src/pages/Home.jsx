@@ -4,7 +4,7 @@ import Header from "../components/Header";
 import {Link} from "react-router-dom"
 
 export default function Home() {
-  const { data, loading, error } = useFetch("http://localhost:3000/categories");
+  const { data, loading, error } = useFetch("https://backend-globaza.vercel.app/categories");
 
   if (loading) return <p className="text-center mt-5">Loading...</p>;
   if (error) return <p className="text-center text-danger mt-5">Error loading categories.</p>;
