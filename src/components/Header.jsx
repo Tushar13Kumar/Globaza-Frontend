@@ -6,11 +6,27 @@ import Wishlist from "../pages/Wishlist";
 import Cart from "../pages/Cart"
 import { useWishlist } from "../context/WishlistContext";
 import Profile from "../pages/Profile";
+import { useState } from "react";
+import useFetch from "../useFetch";
 
 
 
 
-export default function Header() {
+export default function Header({ onSearch }) {
+   const { data, loading, error } = useFetch("https://backend-globaza.vercel.app/products");
+   const [searchQuery, setSearchQuery] = useState("");
+   
+  // Apply filters and search
+  const filteredEvents = data?.filter((event) => {
+    
+    const query = searchQuery.toLowerCase();
+    const searchMatch =
+      event.name.toLowerCase().includes(query)
+      
+    return  searchMatch;
+  });
+ 
+
   return (
     <header className="shadow-sm bg-white py-4">
       {/* Top Navbar */}
@@ -27,6 +43,8 @@ export default function Header() {
             className="form-control me-2"
             placeholder="Search products..."
             aria-label="Search"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
           />
           <button className="btn btn-outline-primary" type="submit">
             <i className="bi bi-search"></i>
@@ -45,8 +63,12 @@ export default function Header() {
             <i className="bi bi-cart">Cart</i>
           </Link>
 
-          <Link to="/profile" className="btn btn-outline-dark">
+          <Link to="/user" className="btn btn-outline-dark">
   <i className="bi bi-person"></i>
+</Link>
+
+            <Link to="/Profile" className="btn btn-outline-dark">
+  <i className="bi bi-pencil"></i>
 </Link>
 
         </div>

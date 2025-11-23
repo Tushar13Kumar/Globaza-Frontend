@@ -1,7 +1,11 @@
 import Header from "../components/Header"
 import { useCart } from "../context/CartContext"
 import { useWishlist } from "../context/WishlistContext"
+import { useNavigate } from "react-router-dom";
+
+
 export default function Cart(){
+     const navigate = useNavigate();
     const {cart , addToCart , removeFromCart , increaseQty , decreaseQty , totalPrice} = useCart()
     const {wishlist , AddToWishlist , RemoveWishlistItem} = useWishlist()
     return(
@@ -40,7 +44,7 @@ export default function Cart(){
                     <h5>Price Details</h5>
                     <hr />
                     <p>Total Price : Rs {totalPrice}</p>
-                    <button className="btn btn-success w-100 mt-4">Checkout Rs {totalPrice}</button>
+                    <button className="btn btn-success w-100 mt-4" onClick={() => navigate("/checkout")}>Checkout Rs {totalPrice}</button>
                 </div>
             </div>
 

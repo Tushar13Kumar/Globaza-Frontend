@@ -10,15 +10,21 @@ import App from './App.jsx'
 import { WishlistProvider } from './context/WishlistContext.jsx';
 import { CartProvider } from './context/CartContext.jsx';
 import { AddressProvider } from './context/AddressContext.jsx';
+import { OrderProvider } from './context/OrderContext.jsx';
+import { AlertProvider } from './context/AlertContext.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+    <AlertProvider>
     <WishlistProvider>
       <CartProvider>
         <AddressProvider>
+           <OrderProvider>
     <App />
+    </OrderProvider>
     </AddressProvider>
     </CartProvider>
     </WishlistProvider>
+    </AlertProvider>
   </StrictMode>,
 )

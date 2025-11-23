@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useAddress } from "../context/AddressContext";
 import { useState } from "react";
+import Header from "../components/Header";
 
 export default function EditAddress() {
   const { id } = useParams();
@@ -19,6 +20,8 @@ export default function EditAddress() {
   };
 
   return (
+     <>
+        <Header/>
     <div className="container mt-4">
       <h2>Edit Address</h2>
 
@@ -62,5 +65,6 @@ export default function EditAddress() {
         <button className="btn btn-primary w-100">Save Address</button>
       </form>
     </div>
+    </>
   );
 }

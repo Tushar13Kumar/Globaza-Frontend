@@ -11,11 +11,13 @@ export function WishlistProvider({children}){
     const AddToWishlist = (product) => {
         if(!wishlist.some((item) => item._id === product._id)){
             setWishlist([...wishlist , product])
+             showAlert("Added to Wishlist ❤️");
         }
     }
 
     const RemoveWishlistItem = (id) => {
         setWishlist(wishlist.filter((item) => item._id !== id))
+         showAlert("Removed from Wishlist 💔", "error");
     }
 
     return (

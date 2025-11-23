@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useAddress } from "../context/AddressContext";
 import { useState } from "react";
+import Header from "../components/Header";
 
 export default function Profile() {
   const { addresses, selectedAddressId, addAddress, deleteAddress, selectAddress } = useAddress();
@@ -21,6 +22,8 @@ export default function Profile() {
   };
 
   return (
+     <>
+        <Header/>
     <div className="container mt-4">
 
       <h2>Manage Addresses</h2>
@@ -87,5 +90,6 @@ export default function Profile() {
         </div>
       ))}
     </div>
+    </>
   );
 }
