@@ -12,9 +12,11 @@ import { CartProvider } from './context/CartContext.jsx';
 import { AddressProvider } from './context/AddressContext.jsx';
 import { OrderProvider } from './context/OrderContext.jsx';
 import { AlertProvider } from './context/AlertContext.jsx';
+import { SearchProvider } from './context/SearchContext.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+    <SearchProvider>
     <AlertProvider>
     <WishlistProvider>
       <CartProvider>
@@ -26,5 +28,6 @@ createRoot(document.getElementById('root')).render(
     </CartProvider>
     </WishlistProvider>
     </AlertProvider>
+    </SearchProvider>
   </StrictMode>,
 )

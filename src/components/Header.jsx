@@ -8,13 +8,15 @@ import { useWishlist } from "../context/WishlistContext";
 import Profile from "../pages/Profile";
 import { useState } from "react";
 import useFetch from "../useFetch";
+import { useSearch } from "../context/SearchContext";
 
 
 
 
 export default function Header({ onSearch }) {
+   const { searchQuery, setSearchQuery } = useSearch();
    const { data, loading, error } = useFetch("https://backend-globaza.vercel.app/products");
-   const [searchQuery, setSearchQuery] = useState("");
+   
    
   // Apply filters and search
   const filteredEvents = data?.filter((event) => {
@@ -38,11 +40,10 @@ export default function Header({ onSearch }) {
 
         {/* Search Bar */}
         <form className="d-flex mx-auto" style={{ width: "50%" }}>
-          <input
-            type="search"
-            className="form-control me-2"
+         <input
+            type="text"
+            className="form-control"
             placeholder="Search products..."
-            aria-label="Search"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />

@@ -11,11 +11,13 @@ import ProductDetails from "./ProductDetails";
 import { Link } from "react-router-dom";
 import { useWishlist } from "../context/WishlistContext";
 import { useCart } from "../context/CartContext";
+import { useSearch } from "../context/SearchContext";
 
 
 
 
 export default function ProductListing() {
+  const { searchQuery } = useSearch();
   const {wishlist , AddToWishlist , RemoveWishlistItem} = useWishlist()
   const {cart , addToCart} = useCart()
 
@@ -79,6 +81,12 @@ setWishlistItems([...wishlistItems , id])
 
 // Replace productData with data everywhere 👇
 let filterProductData = data|| [];
+
+if (searchQuery.trim().length > 0) {
+  filterProductData = filterProductData.filter(product =>
+    product.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+}
 
 // URL category
 if (categoryName) {

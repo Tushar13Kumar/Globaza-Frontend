@@ -8,10 +8,10 @@ export function AlertProvider({ children }) {
   const showAlert = (message, type = "success") => {
     setAlert({ message, type });
 
-    // Hide after 2 seconds
+    // Hide after 1 seconds
     setTimeout(() => {
       setAlert({ message: "", type: "" });
-    }, 2000);
+    }, 1000);
   };
 
   return (

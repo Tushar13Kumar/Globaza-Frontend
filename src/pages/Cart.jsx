@@ -2,10 +2,13 @@ import Header from "../components/Header"
 import { useCart } from "../context/CartContext"
 import { useWishlist } from "../context/WishlistContext"
 import { useNavigate } from "react-router-dom";
+import { useAlert } from "../context/AlertContext";
 
 
 export default function Cart(){
      const navigate = useNavigate();
+     const { showAlert } = useAlert();
+
     const {cart , addToCart , removeFromCart , increaseQty , decreaseQty , totalPrice} = useCart()
     const {wishlist , AddToWishlist , RemoveWishlistItem} = useWishlist()
     return(
