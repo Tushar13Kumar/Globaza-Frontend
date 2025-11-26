@@ -19,7 +19,7 @@ export default function AddAddress() {
   const handleSubmit = (e) => {
     e.preventDefault();
     addAddress(form);
-    navigate("/user");
+    navigate("/profile");
   };
 
   return (
@@ -27,7 +27,6 @@ export default function AddAddress() {
       <Header />
       <div className="container mt-4">
         <h2>Add New Address</h2>
-
         <form className="mt-3" onSubmit={handleSubmit}>
           {Object.keys(form).map((key) => (
             <input
@@ -38,9 +37,7 @@ export default function AddAddress() {
               onChange={(e) => setForm({ ...form, [key]: e.target.value })}
             />
           ))}
-
           <button className="btn btn-success w-100">Save Address</button>
-
         </form>
       </div>
     </>

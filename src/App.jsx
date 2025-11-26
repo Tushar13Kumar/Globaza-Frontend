@@ -1,51 +1,39 @@
 import React from "react";
-import Header from "./components/Header";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Wishlist from "./pages/Wishlist";
 import Cart from "./pages/Cart";
 import ProductListing from "./pages/ProductListing";
-import ProductDetails from "./pages/ProductDetails"
+import ProductDetails from "./pages/ProductDetails";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import Profile from "./pages/Profile";
 import EditAddress from "./pages/EditAddress";
 import Checkout from "./pages/Checkout";
-import OrderSuccess from "./pages/OrderSuccess"
+import OrderSuccess from "./pages/OrderSuccess";
 import User from "./pages/User";
-import AddAddress from "./pages/AddAddress"
+import AddAddress from "./pages/AddAddress";
 import AlertMessage from "./components/AlertMessage";
-
-
-
 
 export default function App() {
   return (
     <>
-    <AlertMessage />
-
-    <Router>
-      <main>
- <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/wishlist" element={<Wishlist />} />
-        <Route path="/cart" element={<Cart />} />
-        {/* //<Route path="/productListing" element={<ProductListing/>} /> */}
-        <Route path="/productDetails/:productId" element={<ProductDetails/>} />
-        <Route path="/productListing/:productId" element={<ProductListing/>} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/edit-address/:id" element={<EditAddress />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="/order-success/:orderId" element={<OrderSuccess />} /> 
-        <Route path="/user" element={<User />} />
-        <Route path="/add-address" element={<AddAddress />} />
-          {/* //<Route path="/edit-address/:id" element={<EditAddress />} /> */}
-
-
-      </Routes>
-      </main>
-    </Router>
-     
+      <AlertMessage />
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/wishlist" element={<Wishlist />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/productDetails/:productId" element={<ProductDetails />} />
+          <Route path="/productListing/:categoryName" element={<ProductListing />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/edit-address/:id" element={<EditAddress />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/order-success/:orderId" element={<OrderSuccess />} />
+          <Route path="/user" element={<User />} />
+          <Route path="/add-address" element={<AddAddress />} />
+        </Routes>
+      </Router>
     </>
   );
 }
