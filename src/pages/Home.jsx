@@ -6,8 +6,37 @@ import {Link} from "react-router-dom"
 export default function Home() {
   const { data, loading, error } = useFetch("https://backend-globaza.vercel.app/categories");
 
-  if (loading) return <p className="text-center mt-5">Loading...</p>;
-  if (error) return <p className="text-center text-danger mt-5">Error loading categories.</p>;
+ // 1. --- CLEAN LOADING STATE CHECK ---
+  if (loading) {
+    return (
+      <>
+        <Header />
+        <main className="container mt-5 mb-5 text-center">
+          {/* Using Bootstrap spinner for a professional look */}
+          <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '50vh' }}>
+            <div className="spinner-border text-primary me-2" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+            <p className="lead m-0">Loading product details...</p>
+          </div>
+        </main>
+      </>
+    );
+  }
+  
+  // 2. --- ERROR STATE CHECK ---
+  if (error) {
+    return (
+      <>
+        <Header />
+        <main className="container mt-5 mb-5 text-center">
+          <p className="text-danger lead">
+             <i className="bi bi-x-octagon-fill me-2"></i> Error fetching product details.
+          </p>
+        </main>
+      </>
+    );
+  }
 
   return (
     <>

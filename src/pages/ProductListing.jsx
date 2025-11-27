@@ -9,18 +9,26 @@ import { useSearch } from "../context/SearchContext";
 export default function ProductListing() {
   const { searchQuery } = useSearch();
   const { wishlist, AddToWishlist, RemoveWishlistItem } = useWishlist();
-  const { cart, addToCart } = useCart();
+  const { cart, addToCart , toggleCart } = useCart();
 
   const { categoryName } = useParams(); // must match App route
   const { data, loading, error } = useFetch("https://backend-globaza.vercel.app/products");
+  console.log(categoryName)
 
   const [categoryCheckBox, setCategoryCheckBox] = useState([]);
   const [rating, setRating] = useState(0);
   const [sortPrice, setSortPrice] = useState("");
 
-  useEffect(() => {
-    if (categoryName) setCategoryCheckBox([categoryName]);
-  }, [categoryName]);
+ // In ProductListing.jsx
+useEffect(() => {
+ // Only set the category checkbox if categoryName is present AND not the placeholder 'all'
+ if (categoryName && categoryName !== "all") {
+    setCategoryCheckBox([categoryName]);
+ } else if (categoryName === "all" && categoryCheckBox.length > 0) {
+    // Optional: Clear category filter when navigating to /all via search
+    setCategoryCheckBox([]); 
+ }
+}, [categoryName]);
 
   const handleCategory = (event) => {
     const { value, checked } = event.target;
@@ -34,28 +42,58 @@ export default function ProductListing() {
     setSortPrice("");
   };
 
-  if (loading) return <p className="text-center mt-5">Loading...</p>;
-  if (error) return <p className="text-center text-danger mt-5">Error loading products.</p>;
+  // 1. --- CLEAN LOADING STATE CHECK ---
+  if (loading) {
+    return (
+      <>
+        <Header />
+        <main className="container mt-5 mb-5 text-center">
+          {/* Using Bootstrap spinner for a professional look */}
+          <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '50vh' }}>
+            <div className="spinner-border text-primary me-2" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+            <p className="lead m-0">Loading product details...</p>
+          </div>
+        </main>
+      </>
+    );
+  }
+  
+  // 2. --- ERROR STATE CHECK ---
+  if (error) {
+    return (
+      <>
+        <Header />
+        <main className="container mt-5 mb-5 text-center">
+          <p className="text-danger lead">
+             <i className="bi bi-x-octagon-fill me-2"></i> Error fetching product details.
+          </p>
+        </main>
+      </>
+    );
+  }
+
+
 
   let filterProductData = data || [];
 
-  // global header search
-  if (searchQuery && searchQuery.trim().length > 0) {
-    filterProductData = filterProductData.filter(p => p.name.toLowerCase().includes(searchQuery.toLowerCase()));
-  }
+ 
+/// From your ProductListing.jsx:
+// 1. Global header search
+if (searchQuery && searchQuery.trim().length > 0) {
+ filterProductData = filterProductData.filter(p => p.name.toLowerCase().includes(searchQuery.toLowerCase()));
+}
 
-  // URL category filter
-  if (categoryName) {
-    filterProductData = filterProductData.filter(p => p.category?.name === categoryName);
-  }
+ // **2. COMBINED Category Filter (THE FIX)**
+ // Only filter products if one or more checkboxes are selected.
+ if (categoryCheckBox.length > 0) {
+filterProductData = filterProductData.filter(p => categoryCheckBox.includes(p.category?.name));
+}
 
-  // Checkbox category (applies if user selected checkboxes)
-  if (!categoryName && categoryCheckBox.length > 0) {
-    filterProductData = filterProductData.filter(p => categoryCheckBox.includes(p.category?.name));
-  }
+// 3. Rating
+filterProductData = filterProductData.filter(p => p.rating >= rating);
 
-  // Rating
-  filterProductData = filterProductData.filter(p => p.rating >= rating);
 
   // Sort
   if (sortPrice === "lowToHigh") filterProductData = [...filterProductData].sort((a, b) => a.price - b.price);
@@ -104,29 +142,55 @@ export default function ProductListing() {
             ) : (
               <div className="row row-cols-1 row-cols-md-4 g-4">
                 {filterProductData.map(product => (
-                  <div className="col" key={product._id}>
-                    <div className="card h-100 shadow-sm border-0 position-relative">
-                      <button onClick={() => wishlist.some(i => i._id === product._id) ? RemoveWishlistItem(product._id) : AddToWishlist(product)}
-                        className="btn position-absolute top-0 end-0 m-2 p-2 bg-white rounded-circle shadow-sm">
-                        {wishlist.some(i => i._id === product._id) ? <i className="bi bi-heart-fill text-danger"></i> : <i className="bi bi-heart"></i>}
-                      </button>
+                 <div className="col" key={product._id}>
+  <div className="product-card card h-100 shadow-sm border-0 position-relative d-flex flex-column">
 
-                      <Link to={`/productDetails/${product._id}`} className="text-decoration-none">
-                        <img src={product.image} alt={product.name} className="card-img-top" style={{ objectFit: "cover", height: "200px" }} />
-                        <div className="card-body text-center">
-                          <h6 className="card-title">{product.name}</h6>
-                          <h5>₹{product.price}</h5>
-                          <p><i className="bi bi-star"></i> {product.rating}</p>
-                        </div>
-                      </Link>
+    {/* Wishlist Button */}
+    <button
+      onClick={() =>
+        wishlist.some(i => i._id === product._id)
+          ? RemoveWishlistItem(product._id)
+          : AddToWishlist(product)
+      }
+      className="btn position-absolute top-0 end-0 m-2 p-2 bg-white rounded-circle shadow-sm z-3"
+    >
+      {wishlist.some(i => i._id === product._id)
+        ? <i className="bi bi-heart-fill text-danger"></i>
+        : <i className="bi bi-heart"></i>
+      }
+    </button>
 
-                      <div className="card-footer bg-white border-0">
-                        <button className="btn btn-primary w-100" onClick={() => addToCart(product)}>
-                          {cart.some(item => item._id === product._id) ? "Go to Cart" : "Add to Cart"}
-                        </button>
-                      </div>
-                    </div>
-                  </div>
+    {/* Image */}
+    <Link to={`/productDetails/${product._id}`} className="text-decoration-none">
+      <img
+        src={product.image || "https://via.placeholder.com/400x300.png?text=No+Image"}
+        alt={product.name}
+        className="card-img-top product-img"
+      />
+
+      {/* Body */}
+      <div className="card-body text-center d-flex flex-column">
+        <h6 className="card-title flex-grow-1">{product.name}</h6>
+        <h5>₹{product.price}</h5>
+        <p className="mb-1">
+          <i className="bi bi-star"></i> {product.rating}
+        </p>
+      </div>
+    </Link>
+
+    {/* Add to Cart Button (sticks at bottom) */}
+    <div className="card-footer bg-white border-0 mt-auto">
+      <button
+        className="btn btn-primary w-100"
+        onClick={() => toggleCart(product)}
+      >
+        {cart.some(item => item._id === product._id) ? "Go to Cart" : "Add to Cart"}
+      </button>
+    </div>
+
+  </div>
+</div>
+
                 ))}
               </div>
             )}
@@ -136,3 +200,4 @@ export default function ProductListing() {
     </>
   );
 }
+
