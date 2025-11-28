@@ -11,7 +11,7 @@ export function AlertProvider({ children }) {
     // Hide after 1 seconds
     setTimeout(() => {
       setAlert({ message: "", type: "" });
-    }, 1000);
+    }, 5000);
   };
 
   return (

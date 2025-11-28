@@ -5,8 +5,11 @@ import useFetch from "../useFetch";
 import { useWishlist } from "../context/WishlistContext";
 import { useCart } from "../context/CartContext";
 import { useSearch } from "../context/SearchContext";
+import { useAlert } from "../context/AlertContext";
 
 export default function ProductListing() {
+    const { showAlert } = useAlert();
+
   const { searchQuery } = useSearch();
   const { wishlist, AddToWishlist, RemoveWishlistItem } = useWishlist();
   const { cart, toggleCart } = useCart();
@@ -260,12 +263,13 @@ export default function ProductListing() {
 
                             {/* Add to Cart Button (sticks at bottom) */}
                             <div className="card-footer bg-white border-0 mt-auto">
-                                <button
-                                    className={`btn w-100 ${cart.some(item => item._id === product._id) ? "btn-outline-success" : "btn-primary"}`}
-                                    onClick={() => toggleCart(product)}
-                                >
-                                    {cart.some(item => item._id === product._id) ? "View Cart" : "Add to Cart"}
-                                </button>
+                               <button
+  className={`btn w-100 ${cart.some(item => item._id === product._id) ? "btn-outline-success" : "btn-primary"}`}
+  onClick={() => toggleCart(product)}
+>
+  {cart.some(item => item._id === product._id) ? "Go to cart" : "Add to Cart"}
+</button>
+
                             </div>
 
                         </div>
