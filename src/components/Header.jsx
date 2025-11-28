@@ -33,9 +33,9 @@ export default function Header() {
         {cart.length > 0 && <span className="badge bg-success position-absolute top-0 start-100 translate-middle">{cart.length}</span>}
       </Link>
 
-      <Link to="/profile" className="btn btn-outline-dark" onClick={onClick}>
-        <i className="bi bi-pencil me-1"></i> Edit Profile
-      </Link>
+{/* <Link to="/profile" className="btn btn-outline-dark" onClick={onClick}>
+ <i className="bi bi-pencil me-1"></i> Edit Profile
+ </Link> */}
 
       <Link to="/user" className="btn btn-outline-dark" onClick={onClick}>
         <i className="bi bi-person me-1"></i> My Account

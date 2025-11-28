@@ -43,7 +43,7 @@ export default function User() {
         {addresses.length === 0 && <p>No saved addresses.</p>}
 
         {addresses.map((addr) => (
-          <div key={addr.id} className="card p-3 mb-2 shadow-sm">
+          <div key={addr.id} className="card p-3 mb-2 shadow-sm mt-3">
             <strong>{addr.name}</strong> | {addr.phone}
             <p>{addr.house}, {addr.city}, {addr.state} - {addr.pincode}</p>
 
