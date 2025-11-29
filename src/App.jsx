@@ -13,13 +13,13 @@ import OrderSuccess from "./pages/OrderSuccess";
 import User from "./pages/User";
 import AddAddress from "./pages/AddAddress";
 
-import AlertMessage from "./components/AlertMessage";
+//import AlertMessage from "./components/AlertMessage";
 
 export default function App() {
   return (
     <Router>
       {/* ✅ Alert must be inside Router so it overlays all pages */}
-      <AlertMessage />
+      {/* <AlertMessage /> */}
 
       <Routes>
         <Route path="/" element={<Home />} />

@@ -4,7 +4,8 @@ import useFetch from "../useFetch";
 import { useParams, useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
-import { useAlert } from "../context/AlertContext"; // Assuming you have an AlertContext
+// import { useAlert } from "../context/AlertContext"; // Assuming you have an AlertContext
+import { useToast } from "../context/ToastContext"; // <-- New Import!
 
 export default function ProductDetails() {
   const { productId } = useParams();
@@ -14,7 +15,8 @@ export default function ProductDetails() {
   const { data, loading, error } = useFetch("https://backend-globaza.vercel.app/products");
   const { cart, addToCart } = useCart();
   const { wishlist, AddToWishlist, RemoveWishlistItem } = useWishlist();
-  const { toggleAlert } = useAlert(); // Using alert for user feedback
+// const { showAlert } = useAlert();
+const { showToast } = useToast(); // <-- New initialization!
 
   // --- UI State Management ---
   const [selectedSize, setSelectedSize] = useState("");
@@ -60,20 +62,21 @@ export default function ProductDetails() {
   // Function to handle Add to Cart logic
   const handleAddToCart = () => {
     if (hasSizes && !selectedSize) {
-      // Show an alert if a size is required but not selected
-      toggleAlert("Please select a size before adding to cart.", "warning");
-      return;
+        // Updated to use the new showToast from ToastContext
+        showToast("Please select a size before adding to cart.", "warning");
+        return;
     }
-    
-    // If the product is already in the cart, navigate there
+
+    // ... rest of the logic
     if (inCart) {
       navigate('/cart');
     } else {
-      // Add product to cart (you might want to pass the selectedSize here)
+      // addToCart will trigger its own toast, but you could add another if needed
       addToCart({ ...product, selectedSize: selectedSize || 'N/A' }); 
-      toggleAlert(`${product.name} added to cart!`, "success");
+      // The toast below is redundant if addToCart already triggers one.
+      // showToast(`${product.name} added to cart!`, "success");
     }
-  };
+};
 
   return (
     <>

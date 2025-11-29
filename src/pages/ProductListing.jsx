@@ -5,10 +5,10 @@ import useFetch from "../useFetch";
 import { useWishlist } from "../context/WishlistContext";
 import { useCart } from "../context/CartContext";
 import { useSearch } from "../context/SearchContext";
-import { useAlert } from "../context/AlertContext";
+// import { useAlert } from "../context/AlertContext";
 
 export default function ProductListing() {
-  const { showAlert } = useAlert();
+  // const { showAlert } = useAlert();
   const navigate = useNavigate(); // 2. Initialize navigate
 
   const { searchQuery } = useSearch();
@@ -149,14 +149,14 @@ export default function ProductListing() {
           if (isOffcanvas) setShowFilterOffcanvas(false);
         }}
       />
-      <label
+      <div
         htmlFor="lowToHigh"
         className={`form-check-label ${
           sortPrice === "lowToHigh" ? "fw-bold text-primary" : ""
         }`}
       >
         Low to High
-      </label>
+      </div>
     </div>
 
     {/* High to Low */}
@@ -173,14 +173,14 @@ export default function ProductListing() {
           if (isOffcanvas) setShowFilterOffcanvas(false);
         }}
       />
-      <label
+      <div
         htmlFor="highToLow"
         className={`form-check-label ${
           sortPrice === "highToLow" ? "fw-bold text-primary" : ""
         }`}
       >
         High to Low
-      </label>
+      </div>
     </div>
   </div>
 </div>

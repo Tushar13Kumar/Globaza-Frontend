@@ -1,18 +1,17 @@
-import { createContext, useContext, useState, useEffect } from "react"; // 👈 Import useEffect
-import { useAlert } from "./AlertContext";
+import { createContext, useContext, useState, useEffect } from "react";
+import { useToast } from "./ToastContext"; // 👈 CHANGE: Import useToast
 
 const WishlistContext = createContext();
 
 export function WishlistProvider({ children }) {
-  // 1. Initialize state from localStorage (or [])
+  // 1. CHANGE: Use useToast instead of useAlert
+  const { showToast } = useToast();
+
   const [wishlist, setWishlist] = useState(() => {
     const savedWishlist = localStorage.getItem("globlaza_wishlist");
     return savedWishlist ? JSON.parse(savedWishlist) : [];
   });
   
-  const { showAlert } = useAlert();
-
-  // 2. Save wishlist to localStorage whenever wishlist changes
   useEffect(() => {
     localStorage.setItem("globlaza_wishlist", JSON.stringify(wishlist));
   }, [wishlist]);
@@ -20,20 +19,23 @@ export function WishlistProvider({ children }) {
   const AddToWishlist = (product) => {
     if (!wishlist.some((item) => item._id === product._id)) {
       setWishlist([...wishlist, product]);
-      showAlert("Added to Wishlist ❤️");
+      showToast(`${product.name} added to Wishlist ❤️`, "success"); // 👈 TOAST
     } else {
-      showAlert("Already in Wishlist", "error");
+      showToast(`${product.name} is already in Wishlist`, "warning"); // 👈 TOAST
     }
   };
 
   const RemoveWishlistItem = (id) => {
+    const itemToRemove = wishlist.find((item) => item._id === id); // Get product name
     setWishlist(wishlist.filter((item) => item._id !== id));
-    showAlert("Removed from Wishlist 💔", "error");
+    showToast(`${itemToRemove.name} removed from Wishlist 💔`, "error"); // 👈 TOAST
   };
 
+  // Logic for moving an item from Wishlist to Cart
   const AddedWishlistItemToCart = (id) => {
+    const product = wishlist.find((item) => item._id === id); // Get product name
     setWishlist(wishlist.filter((item) => item._id !== id));
-    showAlert("Move an item from wishlist to cart ✔", "error");
+    showToast(`Moved ${product.name} to Cart 🛒`, "info"); // 👈 TOAST
   };
 
   return (
