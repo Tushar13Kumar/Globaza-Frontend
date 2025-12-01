@@ -26,7 +26,7 @@ export default function Cart() {
                   <div className="col-3">
                     <img src={item.image} className="img-fluid rounded" alt={item.name} style={{ maxHeight: '150px', objectFit: 'cover' }} />
                   </div>
-                  <div className="col-9 col-lg-6">
+                  <div className="col-9 col-lg-6 col-md-9 mt-2">
                     <h5>{item.name}</h5>
                     <p className="fw-bold mb-1">₹{item.price}</p>
                     <div className="d-flex align-items-center mb-3">
@@ -34,10 +34,10 @@ export default function Cart() {
                       <span className="mx-2 border px-3 py-1 rounded">{item.qty}</span>
                       <button className="btn btn-outline-secondary btn-sm" onClick={() => increaseQty(item._id)}>+</button>
                     </div>
-                    <div className="mt-3">
-                      <button className="btn btn-danger btn-sm" onClick={() => removeFromCart(item._id)}><i className="bi bi-trash me-1"></i> Remove</button>
-                      <button className="btn btn-outline-primary btn-sm ms-2" onClick={() => { AddToWishlist(item); AddedInWishlist(item._id); }}><i className="bi bi-heart me-1"></i> Move to Wishlist</button>
-                    </div>
+                   <div className="mt-3 d-flex flex-column flex-md-row">
+    <button className="btn btn-danger btn-sm w-100 mb-2 mb-md-0 me-md-2" onClick={() => removeFromCart(item._id)}><i className="bi bi-trash me-1"></i> Remove</button>
+    <button className="btn btn-outline-primary btn-sm w-100" onClick={() => { AddToWishlist(item); AddedInWishlist(item._id); }}><i className="bi bi-heart me-1"></i> Move to Wishlist</button>
+</div>
                   </div>
                 </div>
               </div>

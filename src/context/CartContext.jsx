@@ -74,7 +74,7 @@ export function CartProvider({ children }) {
 
   const clearCart = () => {
     setCart([]);
-    showToast("Cart cleared!", "error"); // 👈 TOAST
+    // showToast("Cart cleared!", "error"); // 👈 TOAST
   };
 
   const totalPrice = cart.reduce((sum, item) => sum + item.price * item.qty, 0);

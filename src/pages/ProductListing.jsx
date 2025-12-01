@@ -146,7 +146,7 @@ export default function ProductListing() {
         checked={sortPrice === "lowToHigh"}
         onChange={(e) => {
           setSortPrice(e.target.value);
-          if (isOffcanvas) setShowFilterOffcanvas(false);
+          // if (isOffcanvas) setShowFilterOffcanvas(false);
         }}
       />
       <div
@@ -170,7 +170,7 @@ export default function ProductListing() {
         checked={sortPrice === "highToLow"}
         onChange={(e) => {
           setSortPrice(e.target.value);
-          if (isOffcanvas) setShowFilterOffcanvas(false);
+          // if (isOffcanvas) setShowFilterOffcanvas(false);
         }}
       />
       <div
