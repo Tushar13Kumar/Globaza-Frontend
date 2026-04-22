@@ -25,141 +25,197 @@ git clone https://github.com/Tushar13Kumar/Globaza-Frontend.git
 cd Globaza-Frontend
 npm install
 npm run dev
-⚙️ Environment Setup
-📁 Backend Setup
-Navigate to backend project folder
+```
+
+---
+
+## ⚙️ Environment Setup
+
+### 📁 Backend Setup
+
+1. Clone backend project
+
+```bash
 git clone https://github.com/Tushar13Kumar/backend-Globaza.git
 cd backend-Globaza
-Install dependencies:
+```
+
+2. Install dependencies:
+
+```bash
 npm install
-Create a .env file:
+```
+
+3. Create a `.env` file:
+
+```env
 PORT=5000
 MONGO_URI=your_mongodb_connection_string
-Add dotenv in entry file:
+```
+
+4. Add dotenv:
+
+```js
 require("dotenv").config();
-Start backend server:
+```
+
+5. Run backend:
+
+```bash
 node index.js
-🌐 Frontend Setup
-Navigate to frontend folder
+```
+
+---
+
+### 🌐 Frontend Setup
+
+1. Go to frontend folder
+
+```bash
 cd Globaza-Frontend
-Install dependencies:
+```
+
+2. Install dependencies:
+
+```bash
 npm install
-Start development server:
+```
+
+3. Run project:
+
+```bash
 npm run dev
-🔗 Connecting Frontend & Backend
+```
+
+---
+
+### 🔗 Connecting Frontend & Backend
+
 Backend should run on:
+
+```
 http://localhost:5000
-Set API base URL in frontend:
+```
+
+Set API URL in frontend:
+
+```js
 const BASE_URL = "http://localhost:5000";
-🛠️ Tech Stack
-Frontend
-React JS
-React Router
-Axios
-Backend
-Node.js
-Express.js
-Database
-MongoDB
-Mongoose
-✨ Features
-🛍️ Product Management
-View all products
-View single product details
-Add multiple products
-Delete products
-🗂️ Category Management
-View all categories
-Add categories
-Get category by name or ID
-🛒 Cart System
-View all carts
-Get cart by ID
-Manage cart items
-❤️ Wishlist
-Add and view wishlist
-Fetch wishlist by ID
-📦 Order Management
-Create orders
-View all orders
-📍 Address Management
-View all user addresses
-Get address by ID
-🔗 API Reference
-🛍️ Products
-GET /products
+```
 
-Fetch all products
+---
 
-GET /products/:productId
+## 🛠️ Tech Stack
 
-Fetch single product
+### Frontend
+- React JS
+- React Router
+- Axios
 
-POST /products
+### Backend
+- Node.js
+- Express.js
 
-Add multiple products
+### Database
+- MongoDB
+- Mongoose
 
-DELETE /products/:productId
+### Others
+- REST APIs
+- CORS
 
-Delete product
+---
 
-🗂️ Categories
-GET /categories
+## ✨ Features
 
-Fetch all categories
+### 🛍️ Product Management
+- View all products
+- View single product
+- Add products
+- Delete products
 
-GET /categories/:categoryName
+---
 
-Fetch category by name
+### 🗂️ Category Management
+- View all categories
+- Add categories
+- Fetch category by name or ID
 
-GET /categories/:categoryId
+---
 
-Fetch category by ID
+### 🛒 Cart System
+- View carts
+- Fetch cart by ID
+- Manage items
 
-POST /categories
+---
 
-Add categories
+### ❤️ Wishlist
+- View wishlist
+- Fetch wishlist by ID
 
-📦 Orders
-GET /orders
+---
 
-Fetch all orders
+### 📦 Order Management
+- Create orders
+- View orders
 
-POST /orders
+---
 
-Create new orders
+### 📍 Address Management
+- View all addresses
+- Fetch address by ID
 
-❤️ Wishlist
-GET /wishlist
+---
 
-Fetch wishlist
+## 🔗 API Reference
 
-GET /wishlist/:wishlistId
+### 🛍️ Products
+GET /products  
+GET /products/:productId  
+POST /products  
+DELETE /products/:productId  
 
-Fetch wishlist by ID
+---
 
-🛒 Cart
-GET /carts
+### 🗂️ Categories
+GET /categories  
+GET /categories/:categoryName  
+GET /categories/:categoryId  
+POST /categories  
 
-Fetch all carts
+---
 
-GET /carts/:cartId
+### 📦 Orders
+GET /orders  
+POST /orders  
 
-Fetch cart by ID
+---
 
-📍 Address
-GET /address
+### ❤️ Wishlist
+GET /wishlist  
+GET /wishlist/:wishlistId  
 
-Fetch all addresses
+---
 
-GET /address/:addressId
+### 🛒 Cart
+GET /carts  
+GET /carts/:cartId  
 
-Fetch address by ID
+---
 
-📬 Contact
+### 📍 Address
+GET /address  
+GET /address/:addressId  
+
+---
+
+## 📬 Contact
 
 📧 tusharkumar74761@gmail.com
 
-⭐ Support
+---
+
+## ⭐ Support
 
 If you like this project, give it a ⭐ on GitHub!
