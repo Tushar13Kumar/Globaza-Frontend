@@ -1,223 +1,165 @@
-📦 E-Commerce Web Application (React + Bootstrap)
+# 🛒 Globaza E-commerce
 
-A fully-featured, modular E-Commerce Web Application built using React JS and Bootstrap, implementing core marketplace functionalities such as product listing, filters, sorting, wishlist, cart, checkout, address management, user profile, alerts, and search.
-This project is designed as a foundational major project to understand scalable front-end architecture, global state management, and API integration.
+![React](https://img.shields.io/badge/Frontend-React-blue)
+![Node.js](https://img.shields.io/badge/Backend-Node.js-green)
+![Express](https://img.shields.io/badge/API-Express-black)
+![MongoDB](https://img.shields.io/badge/Database-MongoDB-brightgreen)
+![Status](https://img.shields.io/badge/Project-Active-success)
 
-🚀 1. Project Overview
+---
 
-This application simulates a real-world e-commerce flow that allows users to browse categories, explore products, manage their wishlist/cart, choose delivery addresses, and place orders. The frontend interacts with a defined backend contract (GET APIs for products and categories).
+A **full-stack e-commerce application** to manage products, categories, cart, wishlist, and orders efficiently.
 
-The project focuses on:
+---
 
-Clean and modular component-based architecture
+## 🌐 Live Demo
 
-Reusable UI components
+🔗 https://globaza-frontend.vercel.app/
 
-State management via React Context
+---
 
-Clear separation of API, UI, and business logic
+## ⚡ Quick Start
 
-Real-time UX: alerts, loaders, dynamic filters and search
-
-🧩 2. Key Features
-🏠 Home Page
-
-Displays featured categories.
-
-Clicking a category redirects to the product listing filtered by that category.
-
-🛍️ Product Listing Page
-
-Product cards with image, name, price, rating, Add to Cart, Add to Wishlist.
-
-Includes multiple filters:
-
-Category Filter (checkbox-based)
-
-Rating Filter (range slider)
-
-Clear Filters button
-
-Sort by Price (Low → High, High → Low)
-
-Fully integrated search bar in navbar.
-
-📄 Product Details Page
-
-Clicking a product opens a details page with full information.
-
-Buttons: Add to Cart, Add to Wishlist.
-
-❤️ Wishlist Management
-
-View all wishlist items.
-
-Remove item or Move to Cart.
-
-If item exists in cart, quantity increases.
-
-🛒 Cart Management
-
-Increase / decrease quantity.
-
-Remove item or move to wishlist.
-
-Cart price details card with Checkout button.
-
-📮 Address Management
-
-Add, update, delete, and select delivery addresses.
-
-✅ Checkout
-
-Select address → order summary → Order Placed Successfully.
-
-Order saved in backend.
-
-👤 User Profile
-
-Shows static user data.
-
-Options:
-
-Add Address
-
-View Order History
-
-⚡ Loading & Alerts
-
-Global loading indicators.
-
-Alerts for:
-
-Add/remove cart
-
-Add/remove wishlist
-
-Move between lists
-
-Increase/decrease quantity
-
-🔌 3. Backend API Contract
-Products
-GET all products
-GET /api/products
-
-
-Response:
-
-{
-  "data": {
-    "products": []
-  }
-}
-
-GET single product
-GET /api/products/:productId
-
-
-Response:
-
-{
-  "data": {
-    "product": {}
-  }
-}
-
-Categories
-GET all categories
-GET /api/categories
-
-
-Response:
-
-{
-  "data": {
-    "categories": []
-  }
-}
-
-GET category by ID
-GET /api/categories/:categoryId
-
-
-Response:
-
-{
-  "data": {
-    "category": {}
-  }
-}
-
-🏗️ 4. Technologies Used
-
-React JS (Functional Components + Hooks)
-
-React Router DOM
-
-Bootstrap 5
-
-Context API (Cart, Wishlist, Address, Alerts, Search)
-
-REST API Integration
-
-gh-pages (optional for deployment)
-
-📁 5. Suggested Folder Structure
-src/
-│── api/
-│── components/
-│── context/
-│── pages/
-│── utils/
-│── App.jsx
-│── index.js
-
-🛠️ 6. Installation & Setup
-Clone the repository
-git clone https://github.com/<username>/<repo-name>.git
-cd <repo-name>
-
-Install dependencies
+```bash
+git clone https://github.com/Tushar13Kumar/Globaza-Frontend.git
+cd Globaza-Frontend
 npm install
+npm run dev
+⚙️ Environment Setup
+📁 Backend Setup
+Navigate to backend project folder
+git clone https://github.com/Tushar13Kumar/backend-Globaza.git
+cd backend-Globaza
+Install dependencies:
+npm install
+Create a .env file:
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+Add dotenv in entry file:
+require("dotenv").config();
+Start backend server:
+node index.js
+🌐 Frontend Setup
+Navigate to frontend folder
+cd Globaza-Frontend
+Install dependencies:
+npm install
+Start development server:
+npm run dev
+🔗 Connecting Frontend & Backend
+Backend should run on:
+http://localhost:5000
+Set API base URL in frontend:
+const BASE_URL = "http://localhost:5000";
+🛠️ Tech Stack
+Frontend
+React JS
+React Router
+Axios
+Backend
+Node.js
+Express.js
+Database
+MongoDB
+Mongoose
+✨ Features
+🛍️ Product Management
+View all products
+View single product details
+Add multiple products
+Delete products
+🗂️ Category Management
+View all categories
+Add categories
+Get category by name or ID
+🛒 Cart System
+View all carts
+Get cart by ID
+Manage cart items
+❤️ Wishlist
+Add and view wishlist
+Fetch wishlist by ID
+📦 Order Management
+Create orders
+View all orders
+📍 Address Management
+View all user addresses
+Get address by ID
+🔗 API Reference
+🛍️ Products
+GET /products
 
-Start development server
-npm start
+Fetch all products
 
-Build for production
-npm run build
+GET /products/:productId
 
-🌐 7. Deployment (GitHub Pages)
-Install gh-pages
-npm install --save-dev gh-pages
+Fetch single product
 
-Add to package.json
-"homepage": "https://<username>.github.io/<repo-name>"
+POST /products
 
-Deployment scripts
-"predeploy": "npm run build",
-"deploy": "gh-pages -d build"
+Add multiple products
 
-Deploy command
-npm run deploy
+DELETE /products/:productId
 
-🧭 8. Future Enhancements
+Delete product
 
-JWT-based user authentication (login/signup)
+🗂️ Categories
+GET /categories
 
-Add product reviews & ratings
+Fetch all categories
 
-Admin panel for product management
+GET /categories/:categoryName
 
-Server-side pagination & filtering
+Fetch category by name
 
-Payment gateway integration (Stripe/Razorpay)
+GET /categories/:categoryId
 
-📜 9. License
+Fetch category by ID
 
-This project is open-source and available under the MIT License.
+POST /categories
 
-👨‍💻 10. Author
+Add categories
 
-Tushar Kumar
- 
+📦 Orders
+GET /orders
+
+Fetch all orders
+
+POST /orders
+
+Create new orders
+
+❤️ Wishlist
+GET /wishlist
+
+Fetch wishlist
+
+GET /wishlist/:wishlistId
+
+Fetch wishlist by ID
+
+🛒 Cart
+GET /carts
+
+Fetch all carts
+
+GET /carts/:cartId
+
+Fetch cart by ID
+
+📍 Address
+GET /address
+
+Fetch all addresses
+
+GET /address/:addressId
+
+Fetch address by ID
+
+📬 Contact
+
+📧 tusharkumar74761@gmail.com
+
+⭐ Support
+
+If you like this project, give it a ⭐ on GitHub!
