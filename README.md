@@ -46,20 +46,37 @@ cd backend-Globaza
 npm install
 ```
 
-3. Create a `.env` file:
+---
+
+## 🔐 .env Configuration (IMPORTANT)
+
+Create a `.env` file in the root of backend folder and add:
 
 ```env
 PORT=5000
 MONGO_URI=your_mongodb_connection_string
 ```
 
-4. Add dotenv:
+### Example:
+
+```env
+PORT=5000
+MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/globaza
+```
+
+> ⚠️ Never share your real MongoDB credentials publicly.
+
+---
+
+3. Add dotenv in entry file:
 
 ```js
 require("dotenv").config();
 ```
 
-5. Run backend:
+---
+
+4. Run backend:
 
 ```bash
 node index.js
@@ -129,42 +146,42 @@ const BASE_URL = "http://localhost:5000";
 ## ✨ Features
 
 ### 🛍️ Product Management
-- View all products
-- View single product
-- Add products
-- Delete products
+- View all products  
+- View single product  
+- Add products  
+- Delete products  
 
 ---
 
 ### 🗂️ Category Management
-- View all categories
-- Add categories
-- Fetch category by name or ID
+- View all categories  
+- Add categories  
+- Fetch category by name or ID  
 
 ---
 
 ### 🛒 Cart System
-- View carts
-- Fetch cart by ID
-- Manage items
+- View carts  
+- Fetch cart by ID  
+- Manage items  
 
 ---
 
 ### ❤️ Wishlist
-- View wishlist
-- Fetch wishlist by ID
+- View wishlist  
+- Fetch wishlist by ID  
 
 ---
 
 ### 📦 Order Management
-- Create orders
-- View orders
+- Create orders  
+- View orders  
 
 ---
 
 ### 📍 Address Management
-- View all addresses
-- Fetch address by ID
+- View all addresses  
+- Fetch address by ID  
 
 ---
 
